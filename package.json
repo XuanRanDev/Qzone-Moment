@@ -1,0 +1,14 @@
+{
+  "name": "qzone-history-web",
+  "version": "1.0.0",
+  "description": "The official website for the QZone Time Machine tool.",
+  "author": "XuanRan",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
