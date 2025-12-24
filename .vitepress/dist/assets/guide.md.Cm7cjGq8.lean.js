@@ -1,1 +1,0 @@
-import{_ as r,c as t,o as e,ae as n}from"./chunks/framework.CDjunVez.js";const d=JSON.parse('{"title":"QQ空间时光机使用指南","description":"","frontmatter":{},"headers":[],"relativePath":"guide.md","filePath":"guide.md"}'),o={name:"guide.md"};function l(i,a,c,s,p,h){return e(),t("div",null,[...a[0]||(a[0]=[n("",53)])])}const g=r(o,[["render",l]]);export{d as __pageData,g as default};
