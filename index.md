@@ -10,10 +10,10 @@ hero:
     - theme: brand
       text: 使用指南
       link: /guide
-    - theme: alt
+    - theme: sponsor
       text: 立即下载
       link: https://file.xuanran.cc/qqkjsgj.exe
-    - theme: sponsor
+    - theme: alt
       text: 更新日志
       link: /changelog
 
