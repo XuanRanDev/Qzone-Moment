@@ -4,12 +4,11 @@
 
 
 
-导出的文件包括：[动态内容](https://qzone.xuanran.cc/demo/dtnr.html)、[留言板](https://qzone.xuanran.cc/demo/lyb.html)、[互动排行](https://qzone.xuanran.cc/demo/hdph.html)、`点赞数据.xlsx`、`访客数据.xlsx`、`互动排行.xlsx`、`留言板.xlsx`、`所有评论.xlsx`
+本工具**无法将已删除的内容恢复到QQ空间内查看**，而是以**文件**的形式导出，导出的内容包括：[动态内容](https://qzone.xuanran.cc/demo/dtnr.html)、[留言板](https://qzone.xuanran.cc/demo/lyb.html)、[互动排行](https://qzone.xuanran.cc/demo/hdph.html)、`点赞数据.xlsx`、`访客数据.xlsx`、`互动排行.xlsx`、`留言板.xlsx`、`所有评论.xlsx`
 
 （可点击蓝色字体预览已脱敏的示例结果，受限于QQ空间防盗链，在线浏览时部分图片无法正常显示，实际导出后无此问题）
 
-> **注意**：本工具无法将已删除的内容直接恢复到你的QQ空间中，而是会将数据导出。
-> * 已知问题：发表于2015年前的已删除内容无法找回，2015年后已删除的内容只要存在任意点赞/评论，99.99%都能找回
+> 已知问题：发表于2015年前的已删除内容可能无法找回，2015年后已删除的内容只要存在任意点赞/评论，99.99%都能找回，详情请查看 [**常见问题**](/faq.md)
 
 > 作者开发本软件花费了大量时间，因此并**非免费提供**。但只需一杯奶茶的钱即可。
 
