@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTheme } from '../contexts/ThemeContext'
 
 const navItems = [
   { text: '首页', link: '/' },
@@ -17,6 +18,7 @@ const moreItems = [
 
 export default function Navbar() {
   const location = useLocation()
+  const { theme, toggleTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [moreOpen, setMoreOpen] = useState(false)
@@ -39,14 +41,14 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-gray-950/80 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/20'
+          ? 'bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border-b border-surface-200 dark:border-white/5 shadow-sm dark:shadow-2xl dark:shadow-black/20'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-blue to-neon-purple flex items-center justify-center text-sm font-bold text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-neon-purple flex items-center justify-center text-sm font-bold text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
               时
             </div>
             <span className="text-lg font-bold gradient-text hidden sm:block">QQ空间时光机</span>
@@ -59,8 +61,8 @@ export default function Navbar() {
                 to={item.link}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   location.pathname === item.link
-                    ? 'text-white bg-white/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'text-brand-600 dark:text-white bg-brand-50 dark:bg-white/10'
+                    : 'text-surface-500 dark:text-gray-400 hover:text-surface-900 dark:hover:text-white hover:bg-surface-50 dark:hover:bg-white/5'
                 }`}
               >
                 {item.text}
@@ -68,7 +70,7 @@ export default function Navbar() {
             ))}
 
             <div className="relative" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
-              <button className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center gap-1">
+              <button className="px-4 py-2 rounded-lg text-sm font-medium text-surface-500 dark:text-gray-400 hover:text-surface-900 dark:hover:text-white hover:bg-surface-50 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-1">
                 关于
                 <svg className={`w-3 h-3 transition-transform duration-200 ${moreOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -81,7 +83,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-1 w-48 py-2 glass-card rounded-xl shadow-2xl"
+                    className="absolute right-0 top-full mt-1 w-48 py-2 bg-white dark:bg-surface-900 border border-surface-200 dark:border-white/10 backdrop-blur-xl rounded-xl shadow-xl dark:shadow-2xl"
                   >
                     {moreItems.map((item) => (
                       <a
@@ -89,7 +91,7 @@ export default function Navbar() {
                         href={item.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+                        className="block px-4 py-2.5 text-sm text-surface-600 dark:text-gray-300 hover:text-surface-900 dark:hover:text-white hover:bg-surface-50 dark:hover:bg-white/5 transition-colors"
                       >
                         {item.text}
                       </a>
@@ -99,6 +101,22 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
+            <button
+              onClick={toggleTheme}
+              className="ml-2 p-2 rounded-lg text-surface-500 dark:text-gray-400 hover:text-surface-900 dark:hover:text-white hover:bg-surface-50 dark:hover:bg-white/5 transition-all duration-300"
+              aria-label="切换主题"
+            >
+              {theme === 'dark' ? (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+
             <a
               href="https://file.xuanran.cc/qqkjsgj.exe"
               className="ml-3 btn-primary text-sm !px-5 !py-2"
@@ -107,18 +125,35 @@ export default function Navbar() {
             </a>
           </div>
 
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg text-surface-500 dark:text-gray-400 hover:text-surface-900 dark:hover:text-white hover:bg-surface-50 dark:hover:bg-white/5 transition-colors"
+              aria-label="切换主题"
+            >
+              {theme === 'dark' ? (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
               )}
-            </svg>
-          </button>
+            </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 rounded-lg text-surface-500 dark:text-gray-400 hover:text-surface-900 dark:hover:text-white hover:bg-surface-50 dark:hover:bg-white/5 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {mobileOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -128,7 +163,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-gray-950/95 backdrop-blur-xl border-t border-white/5 overflow-hidden"
+            className="md:hidden bg-white/95 dark:bg-gray-950/95 backdrop-blur-xl border-t border-surface-200 dark:border-white/5 overflow-hidden"
           >
             <div className="px-4 py-4 space-y-1">
               {navItems.map((item) => (
@@ -137,22 +172,22 @@ export default function Navbar() {
                   to={item.link}
                   className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                     location.pathname === item.link
-                      ? 'text-white bg-white/10'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      ? 'text-brand-600 dark:text-white bg-brand-50 dark:bg-white/10'
+                      : 'text-surface-500 dark:text-gray-400 hover:text-surface-900 dark:hover:text-white hover:bg-surface-50 dark:hover:bg-white/5'
                   }`}
                 >
                   {item.text}
                 </Link>
               ))}
-              <div className="pt-2 border-t border-white/5">
-                <p className="px-4 py-2 text-xs text-gray-500">关于</p>
+              <div className="pt-2 border-t border-surface-100 dark:border-white/5">
+                <p className="px-4 py-2 text-xs font-semibold text-surface-400 dark:text-surface-500">关于</p>
                 {moreItems.map((item) => (
                   <a
                     key={item.link}
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block px-4 py-2.5 text-sm text-gray-400 hover:text-white"
+                    className="block px-4 py-2.5 text-sm text-surface-500 dark:text-gray-400 hover:text-surface-900 dark:hover:text-white"
                   >
                     {item.text}
                   </a>

@@ -6,7 +6,7 @@ const versions = [
     version: 'v3.0',
     date: '画饼/暂未实现',
     tag: '计划中',
-    tagColor: 'from-yellow-500/20 to-orange-500/20 text-yellow-400',
+    tagColor: 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400',
     items: [
       '支持导出好友列表',
       '尽可能的以原图形式导出QQ空间相册图片',
@@ -17,7 +17,7 @@ const versions = [
     version: 'v2.4',
     date: '2026.06.21',
     tag: '当前版本',
-    tagColor: 'from-neon-blue/20 to-neon-purple/20 text-neon-blue',
+    tagColor: 'bg-brand-100 dark:bg-brand-500/20 text-brand-700 dark:text-brand-400',
     items: [
       '支持动态二维码，可实现自动授权',
       '修复账号在大批量数据下可能会产生的授权过期问题',
@@ -80,61 +80,69 @@ const versions = [
 
 export default function ChangelogTimeline() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
-    <section ref={ref} className="relative py-32 px-4">
-      <div className="max-w-3xl mx-auto">
+    <section ref={ref} className="relative py-24 px-4">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">更新日志</h2>
-          <p className="text-gray-500">持续迭代，不断进步</p>
+          <h2 className="section-title mb-4">更新日志</h2>
+          <p className="section-desc">持续迭代，不断进步</p>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-neon-blue/50 via-neon-purple/30 to-transparent" />
-
-          <div className="space-y-8">
+        <div className="overflow-x-auto pb-4 -mx-4 px-4">
+          <div className="flex gap-4 min-w-max">
             {versions.map((v, i) => (
               <motion.div
                 key={v.version}
-                initial={{ opacity: 0, x: -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="relative pl-16"
-              >
-                <div className={`absolute left-4 top-6 w-4 h-4 rounded-full border-2 ${
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                className={`w-72 shrink-0 ${
                   v.tag === '当前版本'
-                    ? 'border-neon-blue bg-neon-blue/30 shadow-lg shadow-neon-blue/30'
-                    : 'border-white/20 bg-gray-900'
-                }`} />
-
-                <div className="glass-card p-6 group hover:bg-white/5 transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-3 flex-wrap">
-                    <span className="text-xl font-bold text-white">{v.version}</span>
-                    <span className="text-sm text-gray-500">{v.date}</span>
-                    {v.tag && (
-                      <span className={`text-xs px-2.5 py-0.5 rounded-full bg-gradient-to-r ${v.tagColor} font-medium`}>
-                        {v.tag}
-                      </span>
-                    )}
-                  </div>
-                  <ul className="space-y-1.5">
-                    {v.items.map((item) => (
-                      <li key={item} className="text-sm text-gray-400 flex items-start gap-2">
-                        <span className="mt-1.5 w-1 h-1 rounded-full bg-neon-blue/50 shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                    ? 'bg-gradient-to-br from-brand-50 to-white dark:from-brand-500/10 dark:to-white/5 border-brand-200 dark:border-brand-500/30'
+                    : 'bg-white dark:bg-white/5 border-surface-200 dark:border-white/10'
+                } border rounded-2xl p-5 transition-all duration-300 hover:shadow-lg dark:hover:shadow-brand-500/10 hover:-translate-y-1`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-lg font-bold text-surface-900 dark:text-white">{v.version}</span>
+                  {v.tag && (
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${v.tagColor}`}>
+                      {v.tag}
+                    </span>
+                  )}
                 </div>
+
+                <p className="text-xs text-surface-400 dark:text-surface-500 mb-4">{v.date}</p>
+
+                <ul className="space-y-2">
+                  {v.items.map((item) => (
+                    <li key={item} className="text-sm text-surface-600 dark:text-surface-300 flex items-start gap-2 leading-relaxed">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-400 dark:bg-neon-blue shrink-0" />
+                      <span className="line-clamp-2">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
+        </div>
+
+        <div className="text-center mt-6">
+          <a
+            href="/changelog"
+            className="inline-flex items-center gap-2 text-sm font-medium text-brand-600 dark:text-neon-blue hover:underline"
+          >
+            查看完整更新日志
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>

@@ -15,16 +15,16 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ParticleField />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-950/50 to-gray-950" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 dark:via-gray-950/50 to-white dark:to-gray-950" />
 
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-neon-blue/10 rounded-full blur-[120px] animate-pulse-slow" />
-      <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-neon-purple/10 rounded-full blur-[100px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-200/40 dark:bg-neon-blue/10 rounded-full blur-[120px] animate-pulse-slow" />
+      <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-purple-200/40 dark:bg-neon-purple/10 rounded-full blur-[100px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
         <motion.div custom={0} initial="hidden" animate="visible" variants={fadeUp}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-surface-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-sm mb-8">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-sm text-gray-400">v2.4 最新版本已发布</span>
+            <span className="text-sm text-surface-500 dark:text-gray-400">v2.4 最新版本已发布</span>
           </div>
         </motion.div>
 
@@ -35,7 +35,7 @@ export default function Hero() {
           variants={fadeUp}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-6"
         >
-          <span className="text-white">QQ空间</span>
+          <span className="text-surface-900 dark:text-white">QQ空间</span>
           <br />
           <span className="gradient-text">时光机</span>
         </motion.h1>
@@ -45,7 +45,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="text-lg sm:text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-4 leading-relaxed"
+          className="text-lg sm:text-xl md:text-2xl text-surface-500 dark:text-gray-400 max-w-2xl mx-auto mb-4 leading-relaxed"
         >
           找回那些被遗忘的瞬间
         </motion.p>
@@ -55,7 +55,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="text-sm sm:text-base text-gray-500 max-w-xl mx-auto mb-10"
+          className="text-sm sm:text-base text-surface-400 dark:text-gray-500 max-w-xl mx-auto mb-10"
         >
           回到曾经，拾起遗落的时光。恢复与导出已删除的QQ空间说说、留言、转发等历史内容。
         </motion.p>
@@ -93,9 +93,9 @@ export default function Hero() {
             { label: '恢复率', value: '99.99%' },
             { label: '数据安全', value: '本地处理' },
           ].map((stat) => (
-            <div key={stat.label} className="glass-card p-4 text-center">
+            <div key={stat.label} className="bg-white/70 dark:bg-white/5 backdrop-blur-sm border border-surface-200 dark:border-white/10 rounded-2xl p-4 text-center">
               <div className="text-xl font-bold gradient-text">{stat.value}</div>
-              <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
+              <div className="text-xs text-surface-400 dark:text-gray-500 mt-1">{stat.label}</div>
             </div>
           ))}
         </motion.div>
@@ -107,11 +107,11 @@ export default function Hero() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5">
+        <div className="w-6 h-10 rounded-full border-2 border-surface-300 dark:border-white/20 flex items-start justify-center p-1.5">
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1.5 h-1.5 rounded-full bg-white/40"
+            className="w-1.5 h-1.5 rounded-full bg-surface-400 dark:bg-white/40"
           />
         </div>
       </motion.div>

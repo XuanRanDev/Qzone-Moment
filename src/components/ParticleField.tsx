@@ -113,8 +113,7 @@ export default function ParticleField() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full"
-      style={{ opacity: 0.6 }}
+      className="absolute inset-0 w-full h-full dark:opacity-60 opacity-30"
     />
   )
 }

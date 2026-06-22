@@ -54,8 +54,8 @@ export default function Features() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">核心功能</h2>
-          <p className="text-gray-500 max-w-md mx-auto">
+          <h2 className="section-title mb-4">核心功能</h2>
+          <p className="section-desc max-w-md mx-auto">
             简单、安全、高效地找回您的QQ空间记忆
           </p>
         </motion.div>
@@ -67,13 +67,13 @@ export default function Features() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="glass-card-hover p-8 group cursor-default"
+              className="bg-white/70 dark:bg-white/5 backdrop-blur-sm border border-surface-200 dark:border-white/10 rounded-2xl p-8 group cursor-default transition-all duration-300 hover:shadow-lg dark:hover:shadow-brand-500/10 hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 flex items-center justify-center text-neon-blue mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-neon-blue/20">
+              <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-500/20 flex items-center justify-center text-brand-600 dark:text-neon-blue mb-5 transition-all duration-300 group-hover:scale-110">
                 {feat.icon}
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">{feat.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{feat.desc}</p>
+              <h3 className="text-lg font-semibold text-surface-900 dark:text-white mb-2">{feat.title}</h3>
+              <p className="text-surface-500 dark:text-gray-500 text-sm leading-relaxed">{feat.desc}</p>
             </motion.div>
           ))}
         </div>
