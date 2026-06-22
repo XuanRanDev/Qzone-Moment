@@ -1,9 +1,28 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+
+const slogans = [
+  '钱还能再赚，青春无法重来',
+  '被时间带走的，我们帮你找回',
+  '时间会走远，回忆值得留下',
+  '翻回过去，重新遇见曾经的自己',
+  '那些年的说说，还在等你',
+  '逝去的时光，一键找回',
+  '删除的动态，我们替你保存',
+  '青春不散场，回忆永在线',
+]
 
 export default function Download() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [sloganIndex, setSloganIndex] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSloganIndex((prev) => (prev + 1) % slogans.length)
+    }, 2500)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <section ref={ref} className="relative py-32 px-4">
@@ -22,9 +41,21 @@ export default function Download() {
             <img src="/favicon.ico" alt="logo" className="w-full h-full" />
           </div>
 
-          <h2 className="section-title mb-4">
-            准备好找回回忆了吗？
-          </h2>
+          <div className="h-12 mb-4 flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.h2
+                key={sloganIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="section-title"
+              >
+                {slogans[sloganIndex]}
+              </motion.h2>
+            </AnimatePresence>
+          </div>
+
           <p className="section-desc max-w-lg mx-auto mb-10">
             支持 Windows 10 / 11，下载即用，无需安装。<br />
             只需一杯奶茶的价格，永久使用。
