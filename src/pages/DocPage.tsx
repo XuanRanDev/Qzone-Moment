@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom'
-import { useMemo, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useMemo, useCallback } from 'react'
 import { marked } from 'marked'
 import guideMd from '../docs/guide.md?raw'
 import faqMd from '../docs/faq.md?raw'
@@ -21,11 +21,11 @@ const docs: Record<string, { title: string; content: string }> = {
 
 const sidebarItems: Record<string, { text: string; href: string }[]> = {
   guide: [
-    { text: '软件下载与运行环境', href: '/guide#一、软件下载与环境要求' },
-    { text: '启动与授权', href: '/guide#二、启动与授权' },
-    { text: '导出空间数据', href: '/guide#三、导出空间数据' },
-    { text: '查看导出结果', href: '/guide#四、查看导出结果' },
-    { text: '补充说明', href: '/guide#五、补充说明' },
+    { text: '软件下载与运行环境', href: '#一软件下载与环境要求' },
+    { text: '启动与授权', href: '#二启动与授权' },
+    { text: '导出空间数据', href: '#三导出空间数据' },
+    { text: '查看导出结果', href: '#四查看导出结果' },
+    { text: '补充说明', href: '#五补充说明' },
   ],
 }
 
@@ -34,6 +34,12 @@ function MarkdownContent({ content }: { content: string }) {
 
   const html = useMemo(() => {
     const renderer = new marked.Renderer()
+
+    renderer.heading = ({ tokens, depth }: any) => {
+      const text = tokens.map((t: any) => t.raw || t.text || '').join('')
+      const id = text.replace(/\s+/g, '-').replace(/[^\w\u4e00-\u9fa5-]/g, '')
+      return `<h${depth} id="${id}">${text}</h${depth}>`
+    }
 
     renderer.link = ({ href, title, tokens }: any) => {
       const text = tokens?.map((t: any) => t.raw || t.text || '').join('') || ''
@@ -63,27 +69,19 @@ function MarkdownContent({ content }: { content: string }) {
     const target = e.target as HTMLElement
     if (target.tagName === 'A') {
       const href = target.getAttribute('href')
-      if (href?.startsWith('/') && !href?.startsWith('//')) {
+      if (href?.startsWith('#')) {
+        e.preventDefault()
+        const id = href.slice(1)
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      } else if (href?.startsWith('/') && !href?.startsWith('//')) {
         e.preventDefault()
         navigate(href)
       }
     }
   }, [navigate])
-
-  useEffect(() => {
-    const container = document.getElementById('md-content')
-    if (container) {
-      container.querySelectorAll('a.md-link-internal').forEach(link => {
-        const href = link.getAttribute('href')
-        if (href) {
-          link.addEventListener('click', (e) => {
-            e.preventDefault()
-            navigate(href)
-          })
-        }
-      })
-    }
-  }, [html, navigate])
 
   return (
     <div
@@ -130,13 +128,13 @@ export default function DocPage({ docType }: DocPageProps) {
                 <nav className="space-y-1">
                   <p className="px-4 py-2 text-xs font-semibold text-surface-400 dark:text-surface-500 uppercase tracking-wider">目录</p>
                   {sidebar.map((item) => (
-                    <Link
+                    <a
                       key={item.href}
-                      to={item.href}
+                      href={item.href}
                       className="block px-3 py-2 text-sm text-surface-500 dark:text-surface-400 hover:text-brand-600 dark:hover:text-white hover:bg-brand-50 dark:hover:bg-white/5 rounded-lg transition-all"
                     >
                       {item.text}
-                    </Link>
+                    </a>
                   ))}
                 </nav>
               </div>
