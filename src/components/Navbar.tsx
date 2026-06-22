@@ -8,7 +8,7 @@ const navItems = [
   { text: '使用教程', link: '/guide' },
   { text: '常见问题', link: '/faq' },
   { text: '更新日志', link: '/changelog' },
-  { text: '在线购买', link: '/buy' },
+  { text: '授权查询', link: '/buy' },
 ]
 
 const moreItems = [

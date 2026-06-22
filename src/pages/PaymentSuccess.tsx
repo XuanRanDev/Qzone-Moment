@@ -16,6 +16,8 @@ export default function PaymentSuccess() {
   const tradeNo = searchParams.get('trade_no')
   const outTradeNo = searchParams.get('out_trade_no')
 
+  const isPaid = !!(tradeNo || outTradeNo)
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -38,28 +40,51 @@ export default function PaymentSuccess() {
               </svg>
             </motion.div>
 
-            <h1 className="text-2xl font-bold text-surface-900 dark:text-white mb-2">支付成功</h1>
-            <p className="text-surface-500 dark:text-surface-400 text-sm mb-8">您的授权已激活，现在可以使用软件了</p>
+            {isPaid ? (
+              <>
+                <h1 className="text-2xl font-bold text-surface-900 dark:text-white mb-2">支付成功</h1>
+                <p className="text-surface-500 dark:text-surface-400 text-sm mb-8">
+                  感谢您的赞助支持！您的QQ号已获得永久授权。
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="text-2xl font-bold text-surface-900 dark:text-white mb-2">授权已激活</h1>
+                <p className="text-surface-500 dark:text-surface-400 text-sm mb-8">
+                  该QQ号已获得授权，可直接在任意设备上使用软件。
+                </p>
+              </>
+            )}
 
             <div className="space-y-3 text-left mb-8">
               {qq && (
-                <div className="flex justify-between items-center py-2 border-b border-surface-100 dark:border-white/5">
+                <div className="flex justify-between items-center py-2.5 border-b border-surface-100 dark:border-white/5">
                   <span className="text-sm text-surface-500 dark:text-surface-400">QQ号码</span>
                   <span className="text-sm font-medium text-surface-900 dark:text-white">{qq}</span>
                 </div>
               )}
               {tradeNo && (
-                <div className="flex justify-between items-center py-2 border-b border-surface-100 dark:border-white/5">
+                <div className="flex justify-between items-center py-2.5 border-b border-surface-100 dark:border-white/5">
                   <span className="text-sm text-surface-500 dark:text-surface-400">交易号</span>
                   <span className="text-sm font-medium text-surface-900 dark:text-white font-mono">{tradeNo}</span>
                 </div>
               )}
               {outTradeNo && (
-                <div className="flex justify-between items-center py-2 border-b border-surface-100 dark:border-white/5">
+                <div className="flex justify-between items-center py-2.5 border-b border-surface-100 dark:border-white/5">
                   <span className="text-sm text-surface-500 dark:text-surface-400">订单号</span>
                   <span className="text-sm font-medium text-surface-900 dark:text-white font-mono">{outTradeNo}</span>
                 </div>
               )}
+              <div className="flex justify-between items-center py-2.5">
+                <span className="text-sm text-surface-500 dark:text-surface-400">授权状态</span>
+                <span className="text-sm font-medium text-green-500">永久有效</span>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-surface-50 dark:bg-white/[0.02] border border-surface-100 dark:border-white/5 mb-8">
+              <p className="text-sm text-surface-600 dark:text-surface-300 leading-relaxed">
+                授权已与您的QQ号绑定，您可以在任意设备上下载并使用QQ空间时光机，无需重复购买。
+              </p>
             </div>
 
             <div className="space-y-3">
@@ -74,7 +99,7 @@ export default function PaymentSuccess() {
         </motion.div>
 
         <motion.p custom={1} initial="hidden" animate="visible" variants={fadeUp} className="text-center text-xs text-surface-400 dark:text-surface-500 mt-6">
-          如有疑问请联系 xuanrandev@qq.com
+          如有任何疑问，请联系 xuanrandev@qq.com
         </motion.p>
       </div>
     </motion.div>
