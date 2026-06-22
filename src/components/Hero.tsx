@@ -57,7 +57,7 @@ export default function Hero() {
           variants={fadeUp}
           className="text-sm sm:text-base text-surface-400 dark:text-gray-500 max-w-xl mx-auto mb-10"
         >
-          导出您已删除的QQ空间说说、留言、转发等历史内容。
+          导出您已删除的QQ空间说说、评论、留言等历史内容。
         </motion.p>
 
         <motion.div

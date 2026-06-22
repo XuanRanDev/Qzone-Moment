@@ -120,8 +120,8 @@ export default function Buy() {
 
               <div className="mt-8 grid grid-cols-3 gap-4">
                 {[
-                  { icon: '🔗', title: '账号绑定', desc: '授权绑定QQ号' },
-                  { icon: '📱', title: '多端通用', desc: '任意设备可用' },
+                  { icon: '🔗', title: '账号绑定', desc: '授权绑定账号' },
+                  { icon: '🍭', title: '无效退款', desc: '无法找回支持退款' },
                   { icon: '♾️', title: '永久有效', desc: '一次购买终身使用' },
                 ].map((item) => (
                   <div key={item.title} className="text-center p-4 rounded-xl bg-white/50 dark:bg-white/[0.02] border border-surface-100 dark:border-white/5">
@@ -208,7 +208,9 @@ export default function Buy() {
                   赞助支持QQ空间时光机
                 </p>
                 <p className="text-sm text-surface-500 dark:text-surface-400 leading-relaxed">
-                  如果您认可本工具的价值，欢迎赞助支持项目的持续开发与维护。赞助后您的账号将获得永久授权，可在任意设备上使用。
+                  如果您认可本工具的价值，欢迎赞助支持项目的持续开发与维护。赞助后您的账号将获得永久授权，可在任意设备上使用。<br/>
+                  <br/>
+                  * 且若最后无法找回<b>任何内容</b>支持退款
                 </p>
               </div>
 

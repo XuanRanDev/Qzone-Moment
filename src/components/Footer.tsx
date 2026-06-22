@@ -27,11 +27,11 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-surface-700 dark:text-gray-300 mb-4">联系作者</h3>
             <ul className="space-y-2">
-              <li>
-                <a href="https://github.com/XuanRanDev" target="_blank" rel="noopener noreferrer" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">
-                  GitHub
-                </a>
-              </li>
+              {/*<li>*/}
+              {/*  <a href="https://github.com/XuanRanDev" target="_blank" rel="noopener noreferrer" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">*/}
+              {/*    GitHub*/}
+              {/*  </a>*/}
+              {/*</li>*/}
               <li>
                 <a href="https://blog.xuanran.cc" target="_blank" rel="noopener noreferrer" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">
                   XuanRan's Blog
