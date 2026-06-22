@@ -47,7 +47,7 @@ export default function Hero() {
           variants={fadeUp}
           className="text-lg sm:text-xl md:text-2xl text-surface-500 dark:text-gray-400 max-w-2xl mx-auto mb-4 leading-relaxed"
         >
-          找回那些被遗忘的瞬间
+          回到曾经，拾起遗落的时光
         </motion.p>
 
         <motion.p
@@ -57,7 +57,7 @@ export default function Hero() {
           variants={fadeUp}
           className="text-sm sm:text-base text-surface-400 dark:text-gray-500 max-w-xl mx-auto mb-10"
         >
-          回到曾经，拾起遗落的时光。恢复与导出已删除的QQ空间说说、留言、转发等历史内容。
+          导出您已删除的QQ空间说说、留言、转发等历史内容。
         </motion.p>
 
         <motion.div
@@ -90,7 +90,7 @@ export default function Hero() {
           {[
             { label: '支持平台', value: 'Windows' },
             { label: '当前版本', value: 'v2.4' },
-            { label: '恢复率', value: '99.99%' },
+            { label: '恢复率', value: '极高' },
             { label: '数据安全', value: '本地处理' },
           ].map((stat) => (
             <div key={stat.label} className="bg-white/70 dark:bg-white/5 backdrop-blur-sm border border-surface-200 dark:border-white/10 rounded-2xl p-4 text-center">
