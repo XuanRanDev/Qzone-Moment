@@ -45,7 +45,10 @@ export async function createPayOrder(qq: string): Promise<PayResponse> {
 
   const res = await fetch(`${BASE_URL}/bus/qzone/web-pay`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'tenant-id': '1',
+    },
     body: JSON.stringify({ qq, timestamp, signature }),
   })
 
