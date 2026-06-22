@@ -5,7 +5,6 @@
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
   }
 
   *::-webkit-scrollbar {
@@ -17,58 +16,63 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.1);
+    @apply bg-surface-300 dark:bg-surface-700;
     border-radius: 3px;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    background: #030014;
-    color: #e2e8f0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    @apply bg-white dark:bg-surface-950 text-surface-900 dark:text-surface-200 transition-colors duration-300;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background: rgba(99, 102, 241, 0.3);
+    @apply bg-brand-200 dark:bg-brand-800;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+    @apply bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-surface-200 dark:border-white/10 rounded-2xl transition-colors duration-300;
   }
 
   .glass-card-hover {
     @apply glass-card transition-all duration-300;
   }
   .glass-card-hover:hover {
-    @apply bg-white/10 border-white/20;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(59, 130, 246, 0.1);
+    @apply bg-white dark:bg-white/10 border-surface-300 dark:border-white/20;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 0 40px rgba(99, 102, 241, 0.06);
     transform: translateY(-4px);
   }
 
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #00d4ff, #60a5fa, #a855f7);
+    background-image: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
   }
 
   .neon-glow {
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3), 0 0 30px rgba(99, 102, 241, 0.1);
   }
 
   .btn-primary {
     @apply relative px-8 py-3 rounded-xl font-semibold text-white overflow-hidden transition-all duration-300;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
   }
 
   .btn-primary::before {
     content: '';
     @apply absolute inset-0;
-    background: linear-gradient(135deg, rgba(0,212,255,0), rgba(255,255,255,0.2), rgba(0,212,255,0));
+    background: linear-gradient(135deg, rgba(99,102,241,0), rgba(255,255,255,0.2), rgba(99,102,241,0));
     transform: translateX(-100%);
     transition: transform 0.5s;
   }
@@ -78,18 +82,34 @@
   }
 
   .btn-secondary {
-    @apply px-8 py-3 rounded-xl font-semibold text-white border border-white/20 bg-white/5 backdrop-blur-sm transition-all duration-300;
+    @apply px-8 py-3 rounded-xl font-semibold border transition-all duration-300;
+    @apply text-surface-700 dark:text-white border-surface-300 dark:border-white/20 bg-surface-100 dark:bg-white/5 backdrop-blur-sm;
   }
 
   .btn-secondary:hover {
-    @apply bg-white/10 border-white/30;
+    @apply bg-surface-200 dark:bg-white/10 border-surface-400 dark:border-white/30;
     transform: translateY(-2px);
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl font-bold;
+    @apply text-surface-900 dark:text-white;
+  }
+
+  .section-desc {
+    @apply text-surface-500 dark:text-surface-400;
   }
 }
 
 .grid-bg {
   background-image:
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.dark .grid-bg {
+  background-image:
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
 }

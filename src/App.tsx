@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import { ThemeProvider } from './contexts/ThemeContext'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import DocPage from './pages/DocPage'
@@ -22,10 +23,12 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <Router>
-      <Layout>
-        <AnimatedRoutes />
-      </Layout>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Layout>
+          <AnimatedRoutes />
+        </Layout>
+      </Router>
+    </ThemeProvider>
   )
 }
