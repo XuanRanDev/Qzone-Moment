@@ -27,6 +27,17 @@ const sidebarItems: Record<string, { text: string; href: string }[]> = {
     { text: '查看导出结果', href: '#四查看导出结果' },
     { text: '补充说明', href: '#五补充说明' },
   ],
+  faq: [
+    { text: '软件是免费的吗', href: '#软件是免费的吗' },
+    { text: '支持哪些操作系统', href: '#支持哪些操作系统' },
+    { text: '恢复范围是怎样的', href: '#恢复范围是怎样的--全部内容都能恢复吗' },
+    { text: '扫码登录提示取消', href: '#为什么我扫码登录后明明点击了登录但软件仍提示用户取消登录' },
+    { text: '恢复的内容会回到QQ空间吗', href: '#恢复的内容会回到qq空间吗' },
+    { text: '导出需要多长时间', href: '#导出需要多长时间' },
+    { text: '导出时进度一直在0%', href: '#为什么我导出时进度一直在0' },
+    { text: '提示Windows已保护你的电脑', href: '#为什么会提示windows已保护你的电脑' },
+    { text: '如何联系作者', href: '#遇到问题如何联系作者' },
+  ],
 }
 
 function MarkdownContent({ content }: { content: string }) {
@@ -50,7 +61,10 @@ function MarkdownContent({ content }: { content: string }) {
 
     renderer.heading = ({ tokens, depth }: any) => {
       const text = tokens.map((t: any) => t.raw || t.text || '').join('')
-      const id = text.replace(/\s+/g, '-').replace(/[^\w\u4e00-\u9fa5-]/g, '')
+      const id = text
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\u4e00-\u9fa5-]/g, '')
       return `<h${depth} id="${id}">${text}</h${depth}>`
     }
 
