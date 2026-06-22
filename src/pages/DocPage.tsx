@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import remarkBreaks from 'remark-breaks'
 import type { Components } from 'react-markdown'
 import guideMd from '../docs/guide.md?raw'
 import faqMd from '../docs/faq.md?raw'
@@ -140,7 +141,7 @@ export default function DocPage({ docType }: DocPageProps) {
 
           <article className="flex-1 min-w-0 max-w-4xl">
             <div className="bg-white dark:bg-surface-900/50 backdrop-blur-sm border border-surface-200 dark:border-white/10 rounded-2xl p-8 sm:p-12 shadow-sm dark:shadow-none">
-              <Markdown remarkPlugins={[remarkGfm]} components={components}>
+              <Markdown remarkPlugins={[remarkGfm, remarkBreaks]} components={components}>
                 {doc.content}
               </Markdown>
             </div>
