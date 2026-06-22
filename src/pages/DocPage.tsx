@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import { useMemo, useCallback } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useMemo, useCallback, useEffect } from 'react'
 import { marked } from 'marked'
 import guideMd from '../docs/guide.md?raw'
 import faqMd from '../docs/faq.md?raw'
@@ -31,6 +31,19 @@ const sidebarItems: Record<string, { text: string; href: string }[]> = {
 
 function MarkdownContent({ content }: { content: string }) {
   const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = decodeURIComponent(location.hash.slice(1))
+      setTimeout(() => {
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+  }, [location.hash])
 
   const html = useMemo(() => {
     const renderer = new marked.Renderer()
@@ -66,20 +79,30 @@ function MarkdownContent({ content }: { content: string }) {
   }, [content])
 
   const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLElement
-    if (target.tagName === 'A') {
-      const href = target.getAttribute('href')
-      if (href?.startsWith('#')) {
-        e.preventDefault()
-        const id = href.slice(1)
-        const element = document.getElementById(id)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-      } else if (href?.startsWith('/') && !href?.startsWith('//')) {
-        e.preventDefault()
-        navigate(href)
+    const target = (e.target as HTMLElement).closest('a')
+    if (!target) return
+
+    const href = target.getAttribute('href')
+    if (!href) return
+
+    if (href.includes('#')) {
+      e.preventDefault()
+      const [path, hash] = href.split('#')
+
+      if (path && path !== window.location.pathname) {
+        window.location.href = href
+        return
       }
+
+      const id = decodeURIComponent(hash)
+      const element = document.getElementById(id)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState(null, '', `#${hash}`)
+      }
+    } else if (href.startsWith('/') && !href.startsWith('//')) {
+      e.preventDefault()
+      navigate(href)
     }
   }, [navigate])
 
