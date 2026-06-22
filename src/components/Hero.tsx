@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import ParticleField from './ParticleField'
 
 const fadeUp = {
@@ -75,9 +76,9 @@ export default function Hero() {
               立即下载
             </span>
           </a>
-          <a href="/guide" className="btn-secondary text-base">
+          <Link to="/guide" className="btn-secondary text-base">
             使用教程
-          </a>
+          </Link>
         </motion.div>
 
         <motion.div

@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 const versions = [
   {
@@ -134,15 +135,15 @@ export default function ChangelogTimeline() {
         </div>
 
         <div className="text-center mt-6">
-          <a
-            href="/changelog"
+          <Link
+            to="/changelog"
             className="inline-flex items-center gap-2 text-sm font-medium text-brand-600 dark:text-neon-blue hover:underline"
           >
             查看完整更新日志
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

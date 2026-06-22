@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Footer() {
   return (
     <footer className="border-t border-surface-200 dark:border-white/5 bg-surface-50/50 dark:bg-gray-950/50">
@@ -10,28 +12,23 @@ export default function Footer() {
             </div>
             <p className="text-surface-500 dark:text-gray-500 text-sm leading-relaxed">
               找回那些被遗忘的瞬间。<br />
-              时光不会倒流，但记忆可以重现。
+              恢复与导出已删除的QQ空间内容。
             </p>
           </div>
 
           <div>
             <h3 className="text-sm font-semibold text-surface-700 dark:text-gray-300 mb-4">快速链接</h3>
             <ul className="space-y-2">
-              <li><a href="/guide" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">使用教程</a></li>
-              <li><a href="/faq" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">常见问题</a></li>
-              <li><a href="/changelog" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">更新日志</a></li>
-              <li><a href="/manual_login" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">手动登录教程</a></li>
+              <li><Link to="/guide" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">使用教程</Link></li>
+              <li><Link to="/faq" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">常见问题</Link></li>
+              <li><Link to="/changelog" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">更新日志</Link></li>
+              <li><Link to="/manual_login" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">手动登录教程</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-sm font-semibold text-surface-700 dark:text-gray-300 mb-4">联系作者</h3>
             <ul className="space-y-2">
-              {/*<li>*/}
-              {/*  <a href="https://github.com/XuanRanDev" target="_blank" rel="noopener noreferrer" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">*/}
-              {/*    GitHub*/}
-              {/*  </a>*/}
-              {/*</li>*/}
               <li>
                 <a href="https://blog.xuanran.cc" target="_blank" rel="noopener noreferrer" className="text-surface-500 dark:text-gray-500 hover:text-surface-900 dark:hover:text-white text-sm transition-colors">
                   XuanRan's Blog
