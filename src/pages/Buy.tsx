@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { createPayOrder } from '../api/payment'
 
 export default function Buy() {
@@ -171,9 +170,9 @@ export default function Buy() {
                 <button onClick={handleReset} className="flex-1 btn-secondary text-sm">
                   重新查询
                 </button>
-                <Link to="/guide" className="flex-1 btn-primary text-sm text-center">
+                <a href="/guide" className="flex-1 btn-primary text-sm text-center">
                   <span className="relative z-10">使用教程</span>
-                </Link>
+                </a>
               </div>
             </motion.div>
           ) : (
