@@ -13,10 +13,13 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
+    "@types/marked": "^5.0.2",
     "framer-motion": "^11.3.0",
+    "marked": "^18.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0"
+    "react-router-dom": "^6.26.0",
+    "remark-breaks": "^4.0.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.20",
