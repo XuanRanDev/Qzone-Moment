@@ -10,7 +10,7 @@ export default function Footer() {
             </div>
             <p className="text-surface-500 dark:text-gray-500 text-sm leading-relaxed">
               找回那些被遗忘的瞬间。<br />
-              恢复与导出已删除的QQ空间内容。
+              时光不会倒流，但记忆可以重现。
             </p>
           </div>
 

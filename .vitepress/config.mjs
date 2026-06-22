@@ -16,7 +16,6 @@ export default defineConfig({
             {
                 text: '关于',
                 items: [
-                    {text: 'Github', link: 'https://github.com/XuanRanDev'},
                     {text: "XuanRan's Blog", link: 'https://blog.xuanran.cc'},
                     {text: 'CodeBook', link: 'https://codebook.xuanran.cc'},
                 ]

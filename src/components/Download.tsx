@@ -2,13 +2,14 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 
 const slogans = [
+  '时间带走很多东西，但不该带走回忆。',
   '钱还能再赚，青春无法重来',
   '被时间带走的，我们帮你找回',
   '时间会走远，回忆值得留下',
   '翻回过去，重新遇见曾经的自己',
-  '那些年的说说，还在等你',
-  '逝去的时光，一键找回',
-  '删除的动态，我们替你保存',
+  '时间会走远，回忆值得留下。',
+  '翻回过去，重新遇见曾经的自己。',
+  '每一条说说，都是过去的自己。',
   '青春不散场，回忆永在线',
 ]
 
@@ -20,7 +21,7 @@ export default function Download() {
   useEffect(() => {
     const timer = setInterval(() => {
       setSloganIndex((prev) => (prev + 1) % slogans.length)
-    }, 2500)
+    }, 3500)
     return () => clearInterval(timer)
   }, [])
 

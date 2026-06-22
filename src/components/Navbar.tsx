@@ -12,7 +12,7 @@ const navItems = [
 ]
 
 const moreItems = [
-  { text: 'Github', link: 'https://github.com/XuanRanDev', external: true },
+  // { text: 'Github', link: 'https://github.com/XuanRanDev', external: true },
   { text: "XuanRan's Blog", link: 'https://blog.xuanran.cc', external: true },
   { text: 'CodeBook', link: 'https://codebook.xuanran.cc', external: true },
 ]
