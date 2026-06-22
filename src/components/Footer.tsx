@@ -5,9 +5,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-neon-purple flex items-center justify-center text-sm font-bold text-white">
-                时
-              </div>
+              <img src="/favicon.ico" alt="logo" className="w-8 h-8 rounded-lg" />
               <span className="text-lg font-bold gradient-text">QQ空间时光机</span>
             </div>
             <p className="text-surface-500 dark:text-gray-500 text-sm leading-relaxed">

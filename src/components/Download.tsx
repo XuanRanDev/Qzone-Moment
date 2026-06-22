@@ -18,8 +18,8 @@ export default function Download() {
         >
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-1 bg-gradient-to-r from-transparent via-brand-400/50 dark:via-neon-blue/50 to-transparent" />
 
-          <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-brand-500 to-neon-purple flex items-center justify-center text-3xl font-bold text-white animate-glow">
-            时
+          <div className="w-20 h-20 mx-auto mb-8 rounded-2xl animate-glow overflow-hidden">
+            <img src="/favicon.ico" alt="logo" className="w-full h-full" />
           </div>
 
           <h2 className="section-title mb-4">

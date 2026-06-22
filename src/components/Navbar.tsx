@@ -48,9 +48,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-neon-purple flex items-center justify-center text-sm font-bold text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
-              时
-            </div>
+            <img src="/favicon.ico" alt="logo" className="w-8 h-8 rounded-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" />
             <span className="text-lg font-bold gradient-text hidden sm:block">QQ空间时光机</span>
           </Link>
 
