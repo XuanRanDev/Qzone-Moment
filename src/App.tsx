@@ -5,6 +5,8 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import DocPage from './pages/DocPage'
+import Buy from './pages/Buy'
+import PaymentSuccess from './pages/PaymentSuccess'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -27,6 +29,8 @@ function AnimatedRoutes() {
         <Route path="/faq" element={<DocPage docType="faq" />} />
         <Route path="/changelog" element={<DocPage docType="changelog" />} />
         <Route path="/manual_login" element={<DocPage docType="manual_login" />} />
+        <Route path="/buy" element={<Buy />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
     </AnimatePresence>
   )
