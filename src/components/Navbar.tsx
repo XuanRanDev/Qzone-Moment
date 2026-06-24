@@ -50,7 +50,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/favicon.ico" alt="logo" className="w-8 h-8 rounded-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" />
-            <span className="text-lg font-bold gradient-text hidden sm:block">QQ空间时光机</span>
+            <span className={`text-lg font-bold gradient-text sm:block ${scrolled ? 'block' : 'hidden'}`}>QQ空间时光机</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
