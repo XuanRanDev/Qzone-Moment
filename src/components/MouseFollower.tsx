@@ -6,6 +6,11 @@ export default function MouseFollower() {
   const glowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Purely a desktop cursor decoration (hidden via CSS below `md`) — on
+    // touch devices there's no mousemove to drive it, so skip the rAF loop
+    // and listeners entirely rather than spinning them for nothing.
+    if (window.matchMedia('(pointer: coarse)').matches) return
+
     let animId: number
     let targetX = 0
     let targetY = 0

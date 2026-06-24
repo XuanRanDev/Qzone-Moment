@@ -40,9 +40,9 @@ export default function Navbar() {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${
         scrolled
-          ? 'bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border-b border-surface-200 dark:border-white/5 shadow-sm dark:shadow-2xl dark:shadow-black/20'
+          ? 'bg-white/80 dark:bg-gray-950/80 backdrop-blur-md sm:backdrop-blur-xl border-b border-surface-200 dark:border-white/5 shadow-sm dark:shadow-2xl dark:shadow-black/20'
           : 'bg-transparent'
       }`}
     >
@@ -51,8 +51,8 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-3 group">
             <img src="/favicon.ico" alt="logo" className="w-8 h-8 rounded-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" />
             <span
-              className={`text-lg font-bold gradient-text whitespace-nowrap overflow-hidden transition-all duration-500 sm:!max-w-none sm:!opacity-100 ${
-                scrolled ? 'max-w-[160px] opacity-100' : 'max-w-0 opacity-0'
+              className={`text-lg font-bold gradient-text whitespace-nowrap origin-left transition-[transform,opacity] duration-500 sm:!scale-x-100 sm:!opacity-100 ${
+                scrolled ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
               }`}
             >
               QQ空间时光机

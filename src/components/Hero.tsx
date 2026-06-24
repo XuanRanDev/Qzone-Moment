@@ -26,27 +26,34 @@ export default function Hero() {
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 dark:via-gray-950/50 to-white dark:to-gray-950" />
 
-      <motion.div
-        style={{ y: blobY }}
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[650px] h-[650px] bg-brand-300/55 dark:bg-neon-blue/25 rounded-full blur-[100px] animate-aurora-1"
-      />
-      <motion.div
-        style={{ y: blobY }}
-        className="absolute top-1/3 left-1/3 w-[450px] h-[450px] bg-purple-300/50 dark:bg-neon-purple/25 rounded-full blur-[90px] animate-aurora-2"
-      />
-      <motion.div
-        style={{ y: blobY }}
-        className="absolute bottom-1/4 right-1/4 w-[380px] h-[380px] bg-pink-300/45 dark:bg-neon-pink/20 rounded-full blur-[90px] animate-aurora-3"
-      />
+      {/*
+        Each blob splits scroll-parallax (Framer's `y` motion value, written
+        as an inline transform) from the looping aurora keyframe animation
+        (a CSS transform) onto separate elements. Both target `transform`,
+        and a running CSS animation wins the cascade over an inline style —
+        stacking them on one node made the blob periodically snap to the
+        animation's own coordinate space instead of blending smoothly.
+      */}
+      <motion.div style={{ x: '-50%', y: blobY }} className="absolute top-1/4 left-1/2 w-[650px] h-[650px]">
+        <div className="w-full h-full bg-brand-300/55 dark:bg-neon-blue/25 rounded-full blur-[55px] sm:blur-[100px] animate-aurora-1" />
+      </motion.div>
+      <motion.div style={{ y: blobY }} className="hidden sm:block absolute top-1/3 left-1/3 w-[450px] h-[450px]">
+        <div className="w-full h-full bg-purple-300/50 dark:bg-neon-purple/25 rounded-full blur-[90px] animate-aurora-2" />
+      </motion.div>
+      <motion.div style={{ y: blobY }} className="hidden sm:block absolute bottom-1/4 right-1/4 w-[380px] h-[380px]">
+        <div className="w-full h-full bg-pink-300/45 dark:bg-neon-pink/20 rounded-full blur-[90px] animate-aurora-3" />
+      </motion.div>
 
       {/* unmistakable rotating color sweep behind the headline */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-[90px] opacity-40 dark:opacity-50 animate-spin-slow"
-        style={{
-          background:
-            'conic-gradient(from 0deg, rgba(99,102,241,0.7), rgba(139,92,246,0.7), rgba(6,182,212,0.7), rgba(236,72,153,0.7), rgba(99,102,241,0.7))',
-        }}
-      />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px]">
+        <div
+          className="w-full h-full rounded-full blur-[55px] sm:blur-[90px] opacity-40 dark:opacity-50 animate-spin-slow"
+          style={{
+            background:
+              'conic-gradient(from 0deg, rgba(99,102,241,0.7), rgba(139,92,246,0.7), rgba(6,182,212,0.7), rgba(236,72,153,0.7), rgba(99,102,241,0.7))',
+          }}
+        />
+      </div>
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}

@@ -35,6 +35,11 @@ export default function ParticleField() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // On phones, skip the expensive O(n^2) connecting-line / shadowBlur /
+    // comet work below — this canvas redraws every frame and competes with
+    // scroll compositing, which is the main source of mobile jank here.
+    const isLite = window.matchMedia('(pointer: coarse), (max-width: 768px)').matches
+
     let animId: number
     let particles: Particle[] = []
     let comets: Comet[] = []
@@ -50,7 +55,7 @@ export default function ParticleField() {
     window.addEventListener('resize', resize)
 
     const createParticles = () => {
-      const count = Math.min(Math.floor((canvas.width * canvas.height) / 7000), 200)
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 7000), isLite ? 70 : 200)
       particles = Array.from({ length: count }, () => {
         const depth = Math.random()
         return {
@@ -93,7 +98,7 @@ export default function ParticleField() {
       time++
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      if (time >= nextCometAt) {
+      if (!isLite && time >= nextCometAt) {
         spawnComet()
         nextCometAt = time + 90 + Math.random() * 150
       }
@@ -125,7 +130,7 @@ export default function ParticleField() {
         const opacity = p.baseOpacity * (0.5 + twinkle * 0.5)
 
         ctx.beginPath()
-        if (p.depth > 0.6) {
+        if (!isLite && p.depth > 0.6) {
           ctx.shadowBlur = 8 * p.depth
           ctx.shadowColor = `hsla(${p.hue}, 85%, 65%, ${opacity})`
         } else {
@@ -136,23 +141,25 @@ export default function ParticleField() {
         ctx.fill()
         ctx.shadowBlur = 0
 
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j]
-          const ddx = p.x - p2.x
-          const ddy = p.y - p2.y
-          const dd = Math.sqrt(ddx * ddx + ddy * ddy)
+        if (!isLite) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j]
+            const ddx = p.x - p2.x
+            const ddy = p.y - p2.y
+            const dd = Math.sqrt(ddx * ddx + ddy * ddy)
 
-          if (dd < 120) {
-            const lineOpacity = 0.22 * (1 - dd / 120) * ((p.depth + p2.depth) / 2)
-            const gradient = ctx.createLinearGradient(p.x, p.y, p2.x, p2.y)
-            gradient.addColorStop(0, `hsla(${p.hue}, 80%, 65%, ${lineOpacity})`)
-            gradient.addColorStop(1, `hsla(${p2.hue}, 80%, 65%, ${lineOpacity})`)
-            ctx.beginPath()
-            ctx.moveTo(p.x, p.y)
-            ctx.lineTo(p2.x, p2.y)
-            ctx.strokeStyle = gradient
-            ctx.lineWidth = 0.5
-            ctx.stroke()
+            if (dd < 120) {
+              const lineOpacity = 0.22 * (1 - dd / 120) * ((p.depth + p2.depth) / 2)
+              const gradient = ctx.createLinearGradient(p.x, p.y, p2.x, p2.y)
+              gradient.addColorStop(0, `hsla(${p.hue}, 80%, 65%, ${lineOpacity})`)
+              gradient.addColorStop(1, `hsla(${p2.hue}, 80%, 65%, ${lineOpacity})`)
+              ctx.beginPath()
+              ctx.moveTo(p.x, p.y)
+              ctx.lineTo(p2.x, p2.y)
+              ctx.strokeStyle = gradient
+              ctx.lineWidth = 0.5
+              ctx.stroke()
+            }
           }
         }
       }
