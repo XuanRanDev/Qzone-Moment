@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import Hero from '../components/Hero'
 import Features from '../components/Features'
 import Download from '../components/Download'
+import PrivacySection from '../components/PrivacySection'
 import ChangelogTimeline from '../components/ChangelogTimeline'
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <Features />
       <Download />
+      <PrivacySection />
       <ChangelogTimeline />
     </motion.div>
   )

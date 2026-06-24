@@ -52,9 +52,13 @@
 
   .gradient-text {
     @apply bg-clip-text text-transparent;
+    /* Mobile WebKit (iOS Safari, Android Chrome) needs this set explicitly
+       or it briefly paints the fallback text color before the gradient
+       clip settles, showing as a one-time flicker on first paint. */
+    -webkit-text-fill-color: transparent;
     background-image: linear-gradient(110deg, #6366f1, #8b5cf6, #06b6d4, #8b5cf6, #6366f1);
     background-size: 250% auto;
-    animation: gradient-shift 4s ease infinite;
+    animation: gradient-shift 9s ease infinite;
   }
 
   .neon-glow {
