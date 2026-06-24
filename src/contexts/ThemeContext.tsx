@@ -9,22 +9,34 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType>({ theme: 'light', toggleTheme: () => {} })
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light')
+const getSystemTheme = (): Theme =>
+  window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const saved = localStorage.getItem('theme') as Theme | null
+  const [theme, setTheme] = useState<Theme>(saved ?? getSystemTheme)
+
+  // Follow the OS theme live, but only while the user hasn't manually overridden it.
   useEffect(() => {
-    const saved = localStorage.getItem('theme') as Theme | null
-    if (saved === 'dark' || saved === 'light') {
-      setTheme(saved)
-    }
+    if (localStorage.getItem('theme')) return
+
+    const mql = window.matchMedia('(prefers-color-scheme: dark)')
+    const onChange = (e: MediaQueryListEvent) => setTheme(e.matches ? 'dark' : 'light')
+    mql.addEventListener('change', onChange)
+    return () => mql.removeEventListener('change', onChange)
   }, [])
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
-    localStorage.setItem('theme', theme)
   }, [theme])
 
-  const toggleTheme = () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      const next = prev === 'light' ? 'dark' : 'light'
+      localStorage.setItem('theme', next)
+      return next
+    })
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

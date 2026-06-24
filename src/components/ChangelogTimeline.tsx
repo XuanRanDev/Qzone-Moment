@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useSpotlight } from '../hooks/useSpotlight'
 
 const versions = [
   {
@@ -79,6 +80,45 @@ const versions = [
   },
 ]
 
+function VersionCard({ v, index, isInView }: { v: typeof versions[number]; index: number; isInView: boolean }) {
+  const { ref, onMouseMove } = useSpotlight<HTMLDivElement>()
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={onMouseMove}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: index * 0.08, duration: 0.5 }}
+      className={`spotlight w-72 shrink-0 ${
+        v.tag === '当前版本'
+          ? 'bg-gradient-to-br from-brand-50 to-white dark:from-brand-500/10 dark:to-white/5 border-brand-200 dark:border-brand-500/30'
+          : 'bg-white dark:bg-white/5 border-surface-200 dark:border-white/10'
+      } border rounded-2xl p-5 transition-all duration-300 hover:shadow-lg dark:hover:shadow-brand-500/10 hover:-translate-y-1`}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-lg font-bold text-surface-900 dark:text-white">{v.version}</span>
+        {v.tag && (
+          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${v.tagColor}`}>
+            {v.tag}
+          </span>
+        )}
+      </div>
+
+      <p className="text-xs text-surface-400 dark:text-surface-500 mb-4">{v.date}</p>
+
+      <ul className="space-y-2">
+        {v.items.map((item) => (
+          <li key={item} className="text-sm text-surface-600 dark:text-surface-300 flex items-start gap-2 leading-relaxed">
+            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-400 dark:bg-neon-blue shrink-0" />
+            <span className="line-clamp-2">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  )
+}
+
 export default function ChangelogTimeline() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
@@ -99,37 +139,7 @@ export default function ChangelogTimeline() {
         <div className="overflow-x-auto pb-4 -mx-4 px-4">
           <div className="flex gap-4 min-w-max">
             {versions.map((v, i) => (
-              <motion.div
-                key={v.version}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-                className={`w-72 shrink-0 ${
-                  v.tag === '当前版本'
-                    ? 'bg-gradient-to-br from-brand-50 to-white dark:from-brand-500/10 dark:to-white/5 border-brand-200 dark:border-brand-500/30'
-                    : 'bg-white dark:bg-white/5 border-surface-200 dark:border-white/10'
-                } border rounded-2xl p-5 transition-all duration-300 hover:shadow-lg dark:hover:shadow-brand-500/10 hover:-translate-y-1`}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-lg font-bold text-surface-900 dark:text-white">{v.version}</span>
-                  {v.tag && (
-                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${v.tagColor}`}>
-                      {v.tag}
-                    </span>
-                  )}
-                </div>
-
-                <p className="text-xs text-surface-400 dark:text-surface-500 mb-4">{v.date}</p>
-
-                <ul className="space-y-2">
-                  {v.items.map((item) => (
-                    <li key={item} className="text-sm text-surface-600 dark:text-surface-300 flex items-start gap-2 leading-relaxed">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-400 dark:bg-neon-blue shrink-0" />
-                      <span className="line-clamp-2">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+              <VersionCard key={v.version} v={v} index={i} isInView={isInView} />
             ))}
           </div>
         </div>

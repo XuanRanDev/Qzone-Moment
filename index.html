@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QQ空间时光机 - 让记忆再次上线</title>
     <meta name="description" content="QQ空间时光机 - 让记忆再次上线" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        var isDark = saved === 'dark' || (saved !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', isDark);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

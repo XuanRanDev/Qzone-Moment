@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useSpotlight } from '../hooks/useSpotlight'
 
 const features = [
   {
@@ -41,6 +42,27 @@ const features = [
   },
 ]
 
+function FeatureCard({ feat, index, isInView }: { feat: typeof features[number]; index: number; isInView: boolean }) {
+  const { ref, onMouseMove } = useSpotlight<HTMLDivElement>()
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={onMouseMove}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: index * 0.1, duration: 0.6 }}
+      className="spotlight bg-white/70 dark:bg-white/5 backdrop-blur-sm border border-surface-200 dark:border-white/10 rounded-2xl p-8 group cursor-default transition-all duration-300 hover:shadow-lg dark:hover:shadow-brand-500/10 hover:-translate-y-1 hover:border-brand-300/60 dark:hover:border-brand-500/30"
+    >
+      <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-500/20 flex items-center justify-center text-brand-600 dark:text-neon-blue mb-5 transition-all duration-300 group-hover:scale-110">
+        {feat.icon}
+      </div>
+      <h3 className="text-lg font-semibold text-surface-900 dark:text-white mb-2">{feat.title}</h3>
+      <p className="text-surface-500 dark:text-gray-500 text-sm leading-relaxed">{feat.desc}</p>
+    </motion.div>
+  )
+}
+
 export default function Features() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
@@ -62,19 +84,7 @@ export default function Features() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {features.map((feat, i) => (
-            <motion.div
-              key={feat.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="bg-white/70 dark:bg-white/5 backdrop-blur-sm border border-surface-200 dark:border-white/10 rounded-2xl p-8 group cursor-default transition-all duration-300 hover:shadow-lg dark:hover:shadow-brand-500/10 hover:-translate-y-1"
-            >
-              <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-500/20 flex items-center justify-center text-brand-600 dark:text-neon-blue mb-5 transition-all duration-300 group-hover:scale-110">
-                {feat.icon}
-              </div>
-              <h3 className="text-lg font-semibold text-surface-900 dark:text-white mb-2">{feat.title}</h3>
-              <p className="text-surface-500 dark:text-gray-500 text-sm leading-relaxed">{feat.desc}</p>
-            </motion.div>
+            <FeatureCard key={feat.title} feat={feat} index={i} isInView={isInView} />
           ))}
         </div>
       </div>

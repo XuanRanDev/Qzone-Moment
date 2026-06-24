@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useRef } from 'react'
 import ParticleField from './ParticleField'
 
 const fadeUp = {
@@ -12,16 +13,45 @@ const fadeUp = {
 }
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
+
+  const blobY = useTransform(scrollYProgress, [0, 1], [0, 160])
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <ParticleField />
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 dark:via-gray-950/50 to-white dark:to-gray-950" />
 
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-200/40 dark:bg-neon-blue/10 rounded-full blur-[120px] animate-pulse-slow" />
-      <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-purple-200/40 dark:bg-neon-purple/10 rounded-full blur-[100px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
+      <motion.div
+        style={{ y: blobY }}
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[650px] h-[650px] bg-brand-300/55 dark:bg-neon-blue/25 rounded-full blur-[100px] animate-aurora-1"
+      />
+      <motion.div
+        style={{ y: blobY }}
+        className="absolute top-1/3 left-1/3 w-[450px] h-[450px] bg-purple-300/50 dark:bg-neon-purple/25 rounded-full blur-[90px] animate-aurora-2"
+      />
+      <motion.div
+        style={{ y: blobY }}
+        className="absolute bottom-1/4 right-1/4 w-[380px] h-[380px] bg-pink-300/45 dark:bg-neon-pink/20 rounded-full blur-[90px] animate-aurora-3"
+      />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+      {/* unmistakable rotating color sweep behind the headline */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-[90px] opacity-40 dark:opacity-50 animate-spin-slow"
+        style={{
+          background:
+            'conic-gradient(from 0deg, rgba(99,102,241,0.7), rgba(139,92,246,0.7), rgba(6,182,212,0.7), rgba(236,72,153,0.7), rgba(99,102,241,0.7))',
+        }}
+      />
+
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-10 max-w-4xl mx-auto px-4 text-center"
+      >
         <motion.div custom={0} initial="hidden" animate="visible" variants={fadeUp}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-surface-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-sm mb-8">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
@@ -100,7 +130,7 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}

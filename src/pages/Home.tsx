@@ -13,12 +13,9 @@ export default function Home() {
       transition={{ duration: 0.3 }}
     >
       <Hero />
-
-      <div className="grid-bg relative">
-        <Features />
-        <Download />
-        <ChangelogTimeline />
-      </div>
+      <Features />
+      <Download />
+      <ChangelogTimeline />
     </motion.div>
   )
 }

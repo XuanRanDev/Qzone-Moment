@@ -1,5 +1,6 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
+import { useSpotlight } from '../hooks/useSpotlight'
 
 const slogans = [
   '时间带走很多东西，但不该带走回忆。',
@@ -17,6 +18,7 @@ export default function Download() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [sloganIndex, setSloganIndex] = useState(0)
+  const { ref: spotlightRef, onMouseMove } = useSpotlight<HTMLDivElement>()
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -31,10 +33,12 @@ export default function Download() {
 
       <div className="relative max-w-4xl mx-auto">
         <motion.div
+          ref={spotlightRef}
+          onMouseMove={onMouseMove}
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="bg-white dark:bg-surface-900/50 backdrop-blur-sm border border-surface-200 dark:border-white/10 rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden shadow-sm dark:shadow-none"
+          className="spotlight bg-white dark:bg-surface-900/50 backdrop-blur-sm border border-surface-200 dark:border-white/10 rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden shadow-sm dark:shadow-none"
         >
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-1 bg-gradient-to-r from-transparent via-brand-400/50 dark:via-neon-blue/50 to-transparent" />
 
